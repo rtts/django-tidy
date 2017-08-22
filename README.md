@@ -6,13 +6,15 @@ Make Django tidy up your HTML with [HTML Tidy](http://www.html-tidy.org/)!
 
 1. Make sure the original `tidy` command is installed (e.g., `sudo apt install tidy`)
 
-2. Copy the `tidy/` directory from this repository to your Django project (or anywhere else on your Python path)
+2. Install pytidylib: `pip install pytidylib`
 
-3. Add the following to your `MIDDLEWARE` setting:
+3. Copy the `tidy/` directory from this repository to your Django project (or anywhere else on your Python path)
 
-    MIDDLEWARE += ['tidy.middleware.TidyMiddleware']
+4. Add the following to your `MIDDLEWARE` setting:
 
-4. Enjoy!
+        MIDDLEWARE += ['tidy.middleware.TidyMiddleware']
+
+5. Enjoy!
 
 ## Precautions
 
