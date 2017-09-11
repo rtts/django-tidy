@@ -18,7 +18,13 @@ class TidyMiddleware(object):
                 'output-encoding': 'utf8',
                 'drop-empty-elements': False,
             }
-            response.content, errors = tidy_document(response.content, options)
-            if errors and settings.DEBUG:
-                raise ValueError('The generated HTML contains the following errors:\n\n' + errors)
+
+            if response.content:
+                tidy_content, errors = tidy_document(response.content, options)
+                if errors:
+                    if settings.DEBUG:
+                        raise ValueError('The generated HTML contains the following errors:\n\n' + errors)
+                else:
+                    response.content = tidy_content
+
         return response
