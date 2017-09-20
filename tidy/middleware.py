@@ -8,7 +8,7 @@ class TidyMiddleware(object):
 
     def __call__(self, request):
         response = self.get_response(request)
-        if response['Content-Type'] == 'text/html; charset=utf-8':
+        if 'Content-Type' in response and response['Content-Type'] == 'text/html; charset=utf-8':
             if 'Content-Length' in response:
                 raise ImproperlyConfigured('Please load TidyMiddleware _after_ CommonMiddleware otherwise the "Content-Length" header will be incorrect!')
             options = {
