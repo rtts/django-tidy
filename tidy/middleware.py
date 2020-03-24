@@ -12,19 +12,15 @@ class TidyMiddleware(object):
             if 'Content-Length' in response:
                 raise ImproperlyConfigured('Please load TidyMiddleware _after_ CommonMiddleware otherwise the "Content-Length" header will be incorrect!')
             options = {
+                'wrap': 80,
                 'indent-spaces': 2,
+                'vertical-space': True,
                 'doctype': 'html5',
-                'input-encoding': 'utf8',
-                'output-encoding': 'utf8',
-                'drop-empty-elements': False,
             }
 
             if response.content:
                 tidy_content, errors = tidy_document(response.content, options)
-                if errors:
-                    if settings.DEBUG:
-                        raise ValueError('The generated HTML contains the following errors:\n\n' + errors)
-                else:
-                    response.content = tidy_content
+                print(errors)
+                response.content = tidy_content
 
         return response
