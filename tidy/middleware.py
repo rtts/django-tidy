@@ -16,6 +16,7 @@ class TidyMiddleware(object):
                 'indent-spaces': 2,
                 'vertical-space': True,
                 'doctype': 'html5',
+                'drop-empty-elements': False,
             }
 
             if response.content:
